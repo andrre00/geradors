@@ -1,0 +1,17 @@
+pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                // Compilar o código Java
+                sh 'javac src/GeradorDeSenhas.java'
+            }
+        }
+        stage('Test') {
+            steps {
+                // Executar o programa Java
+                sh 'java -cp src GeradorDeSenhas'
+            }
+        }
+    }
+}
