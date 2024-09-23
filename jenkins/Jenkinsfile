@@ -1,16 +1,12 @@
 pipeline {
-    agent any
+    agent none
     stages {
         stage('Build') {
-            steps {
-                // Compilar o código Java
-                sh 'javac src/GeradorDeSenhas.java'
+            agent {
+                docker { image 'maven'}
             }
-        }
-        stage('Test') {
             steps {
-                // Executar o programa Java
-                sh 'java -cp src GeradorDeSenhas'
+                sh "mvn package -Dmaven.test.skip=true"
             }
         }
     }
