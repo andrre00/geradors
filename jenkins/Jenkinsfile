@@ -1,14 +1,9 @@
 pipeline {
-    agent {
-        docker {
-            image 'maven:3.8.1'  // Definindo a imagem Docker que será usada
-            args '-v /root/.m2:/root/.m2'  // (Opcional) Argumentos extras para o container Docker
-        }
-    }
+    agent any
     stages {
         stage('Build') {
             steps {
-                // Aqui, o código será executado dentro do container Docker
+                // Aqui, o código será executado diretamente no agente Jenkins
                 sh 'mvn --version'
                 sh 'mvn clean package'
             }
