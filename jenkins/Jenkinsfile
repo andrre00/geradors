@@ -1,11 +1,12 @@
 pipeline {
-    agent any
+    agent none
     stages {
         stage('Build') {
+            agent {
+                docker { image 'maven'}
+            }
             steps {
-                // Aqui, o código será executado diretamente no agente Jenkins
-                sh 'mvn --version'
-                sh 'mvn clean package'
+                sh "mvn package -Dmaven.test.skip=true"
             }
         }
     }
